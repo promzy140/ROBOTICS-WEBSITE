@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Future Builders</title>
+<style>
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #5f9cff, #ff5f9e);
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+}
+
+/* Nav bar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 16px;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.menu a:hover {
+    color: #ffd700;
+    transform: scale(1.1);
+}
+
+/* Hero section */
+.hero {
+    margin-top: 80px;
+}
+
+.hero h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.hero h1 {
+    font-size: 70px;
+    margin: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.buttons {
+    margin-top: 40px;
+}
+
+button {
+    padding: 15px 35px;
+    border: none;
+    border-radius: 30px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+button.primary {
+    background: black;
+    color: white;
+}
+
+button.secondary {
+    background: white;
+    color: black;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* Content card */
+.content-box {
+    max-width: 800px;
+    margin: 50px auto;
+    background: rgba(0,0,0,0.6);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    color: white;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.content-box.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content-box h2 {
+    margin-top: 0;
+    color: #ffdd59;
+}
+
+.content-box p, .content-box ul {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.content-box a {
+    color: #5f9cff;
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+    margin-top: 120px;
+    opacity: 0.8;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">FutureBuilders</div>
+    <div class="menu">
+        <a href="#" onclick="showContent('home', event)">Home</a>
+        <a href="#" onclick="showContent('events', event)">Events</a>
+        <a href="#" onclick="showContent('community', event)">Community</a>
+        <a href="#" onclick="showContent('builders', event)">Meet Builders</a>
+        <a href="#" onclick="showContent('login', event)">Login</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <h2>WELCOME TO BUILDERS DAY</h2>
+    <h1>Create. Learn. Build.</h1>
+    <p>The new generation of builders is here. Anyone can start creating today.</p>
+
+    <div class="buttons">
+        <button class="primary" onclick="showContent('community')">Join Community</button>
+        <button class="secondary" onclick="showContent('events')">View Events</button>
+        <button class="secondary" onclick="showContent('builders')">Meet Builders</button>
+    </div>
+</div>
+
+<!-- Content area -->
+<div id="content" class="content-box"></div>
+
+<div class="footer">
+    Powered by creativity and young developers 🚀
+</div>
+
+<script>
+// Function to show content dynamically
+function showContent(page, event) {
+    if(event) event.preventDefault(); // prevent link jump
+
+    const contentDiv = document.getElementById("content");
+
+    let content = "";
+
+    switch(page) {
+        case "home":
+            content = `
+                <h2>Welcome to Future Builders</h2>
+                <p>Create, Learn, Build — the new generation of builders is here!</p>
+            `;
+            break;
+        case "events":
+            content = `
+                <h2>Upcoming Events</h2>
+                <p>1. Hackathon – 12th March</p>
+                <p>2. Workshop on Robotics – 20th March</p>
+                <p>3. Coding Bootcamp – 28th March</p>
+            `;
+            break;
+        case "community":
+            content = `
+                <h2>Join Our Community</h2>
+                <p>Connect with other builders, share ideas, and learn together.</p>
+                <p>Discord: <a href="https://discord.gg/futurebuilders" target="_blank">discord.gg/futurebuilders</a></p>
+                <p>Telegram: <a href="https://t.me/futurebuilders" target="_blank">t.me/futurebuilders</a></p>
+            `;
+            break;
+        case "builders":
+            content = `
+                <h2>Meet Builders</h2>
+                <p>See profiles of young innovators and their projects:</p>
+                <ul>
+                    <li>Alex – Robotics Expert</li>
+                    <li>Maria – App Developer</li>
+                    <li>John – AI Enthusiast</li>
+                </ul>
+            `;
+            break;
+        case "login":
+            content = `
+                <h2>Login</h2>
+                <p>Please enter your credentials on the login page.</p>
+            `;
+            break;
+        default:
+            content = "<p>Content not found.</p>";
+    }
+
+    contentDiv.innerHTML = content;
+
+    // Trigger fade-in animation
+    contentDiv.classList.remove("show");
+    setTimeout(() => {
+        contentDiv.classList.add("show");
+    }, 10);
+
+    // Scroll smoothly to content
+    contentDiv.scrollIntoView({ behavior: "smooth" });
+}
+
+// Hero buttons hover effect
+const heroButtons = document.querySelectorAll(".buttons button");
+heroButtons.forEach(button => {
+    button.addEventListener("mouseenter", () => {
+        button.style.transform = "scale(1.05)";
+    });
+    button.addEventListener("mouseleave", () => {
+        button.style.transform = "scale(1)";
+    });
+});
+</script>
+</body>
+</html>
